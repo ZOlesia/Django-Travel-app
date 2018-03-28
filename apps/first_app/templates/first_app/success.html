@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <a href="/logout">Logout</a>
+    <h2>Welcome {{ user.alias }}!</h2>
+
+    <div id = "your_trip">
+        <p>Your trip schedules</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Destination</th>
+                    <th>Travel Start Date</th>
+                    <th>Travel End Date</th>
+                    <th>Plan</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for trip in your_trips %}
+                    <tr>
+                            <td><a href="/travels/destination/{{ trip.id }}">{{ trip.destination}}</a></td>
+                            <td>{{ trip.start }}</td>
+                            <td>{{ trip.end }}</td>
+                            <td>{{ trip.description }}</td>
+                        </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div id = "other_trips">
+        <p>Other User`s Travel Plans</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Destination</th>
+                    <th>Travel Start Date</th>
+                    <th>Travel End Date</th>
+                    <th>Do you want to join</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for trip in all_trips %}
+                    <tr>
+                            <td>{{ trip.created_by.alias }}</td>
+                            <td><a href="/travels/destination/{{ trip.id }}">{{ trip.destination }}</a></td>
+                            <td>{{ trip.start }}</td>
+                            <td>{{ trip.end }}</td>
+                            <td><a href="/travels/join/{{ trip.id }}">join</a></td>
+                            <td></td>
+                        </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <a href="/travels/add">Add travel Plan</a>
+</body>
+</html>
